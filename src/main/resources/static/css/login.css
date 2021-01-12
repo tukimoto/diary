@@ -1,0 +1,22 @@
+.top{ 
+  
+  background-color: rgb(39, 37, 37);
+  color: aliceblue;
+}
+.top h1{
+  text-align: center;
+}
+a{
+  color:aliceblue;
+  text-decoration: none;
+
+}
+.main h1{
+  text-align: center;
+}
+form{
+  text-align: center;
+}
+input{
+  width: 150px;
+}

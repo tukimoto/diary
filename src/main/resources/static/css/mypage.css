@@ -1,0 +1,23 @@
+
+.top{ 
+  
+  background-color: rgb(39, 37, 37);
+  color: aliceblue;
+}
+.top h1{
+  text-align: center;
+}
+.top a{
+  color:aliceblue;
+  text-decoration: none;
+}
+textarea{
+ width:100%;
+}
+ input{
+  float: right;
+ margin:25px;
+}
+.deta{
+  float:left;
+}
