@@ -12,7 +12,7 @@
   </div>
   <div class="main">
       <h1> ログイン</h1>
-    <form action="/log" method="post" th:object="${formModel}"> 
+    <form th:action="@{/log}" method="post" th:object="${formModel}"> 
       <input type="text" value="名前" name="name"><br>
       <input type="text" value="メールアドレス" name="mail"><br>
       <input type="password" value="パスワード" name="pass"><br>
