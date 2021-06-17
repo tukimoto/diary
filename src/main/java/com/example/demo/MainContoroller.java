@@ -43,20 +43,24 @@ public class MainContoroller {
 		mv.setViewName("log");
 		return mv;
 	}
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public ModelAndView loginGet(ModelAndView mv) {
-		List<UserData> customers=repository.findAll();
-		mv.addObject("customers",customers);
-		mv.setViewName("login");
-		return mv;
+	@RequestMapping(value="/log",method=RequestMethod.POST)
+	public ModelAndView logPost(ModelAndView mv) {
+		return new ModelAndView("redirect:/mypage");
 	}
-	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView indexpost(@ModelAttribute("formModel")UserData UserData, ModelAndView mv) {
-		repository.saveAndFlush(UserData);	
-//		System.out.print(UserData.getId());
-		return new ModelAndView("redirect:/mypage/"+UserData.getId());
-	}
-	@RequestMapping(value="/mypage/{id}",method=RequestMethod.GET)
+	
+//	@RequestMapping(value="/login",method=RequestMethod.GET)
+//	public ModelAndView loginGet(ModelAndView mv) {
+//		List<UserData> customers=repository.findAll();
+//		mv.addObject("customers",customers);
+//		mv.setViewName("login");
+//		return mv;
+//	}
+//	@RequestMapping(value="/login",method=RequestMethod.POST)
+//	public ModelAndView indexpost(@ModelAttribute("formModel")UserData UserData, ModelAndView mv) {
+//		repository.saveAndFlush(UserData);	
+//		return new ModelAndView("redirect:/mypage/"+UserData.getId());
+//	}
+		@RequestMapping(value="/mypage",method=RequestMethod.GET)
 	public ModelAndView myget(@PathVariable("id")long id, ModelAndView mv) {
 		UserData UserId=repository.findById(id);
 	 	List<Diary> diarylist=diaryrepository.findByUserdata(UserId);
@@ -64,7 +68,13 @@ public class MainContoroller {
 		mv.setViewName("mypage");
 		return mv;
 	}
-	@RequestMapping(value="/mypage/{id}",method=RequestMethod.POST)
+		
+	@RequestMapping(value="/mypage",method=RequestMethod.GET)
+	public ModelAndView mypage(ModelAndView mv) {
+		mv.setViewName("mypage");
+		return mv;
+	}
+	@RequestMapping(value="/mypage",method=RequestMethod.POST)
 	public ModelAndView mypost(@PathVariable("id")int id,@RequestParam("text")String text,@RequestParam("data")String data,HttpServletRequest httpServletRequest,ModelAndView mv) {
 		String username=httpServletRequest.getRemoteUser();
 		 UserData userdata=repository.findById(id);
@@ -74,7 +84,7 @@ public class MainContoroller {
 		 d.setData(data);
 		diaryrepository.save(d);
 			
-		return new ModelAndView("redirect:/mypage/"+id);
+		return new ModelAndView("redirect:/mypage");
 	}
 	private final String VIEW_NAME="index";
 	@GetMapping("cookie0")
