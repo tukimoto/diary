@@ -61,28 +61,30 @@ public class MainContoroller {
 //		return new ModelAndView("redirect:/mypage/"+UserData.getId());
 //	}
 		@RequestMapping(value="/mypage",method=RequestMethod.GET)
-	public ModelAndView myget(@PathVariable("id")long id, ModelAndView mv) {
-		UserData UserId=repository.findById(id);
-	 	List<Diary> diarylist=diaryrepository.findByUserdata(UserId);
+	public ModelAndView myget(ModelAndView mv) {
+//		UserData UserId=repository.findById(id);
+	 	List<Diary> diarylist=diaryrepository.findAll();
 		mv.addObject("diarylist",diarylist);
+//		System.out.println(UserId);
+		
 		mv.setViewName("mypage");
 		return mv;
 	}
 		
-	@RequestMapping(value="/mypage",method=RequestMethod.GET)
-	public ModelAndView mypage(ModelAndView mv) {
-		mv.setViewName("mypage");
-		return mv;
-	}
+//	@RequestMapping(value="/mypage",method=RequestMethod.GET)
+//	public ModelAndView mypage(ModelAndView mv) {
+//		mv.setViewName("mypage");
+//		return mv;
+//	}
 	@RequestMapping(value="/mypage",method=RequestMethod.POST)
-	public ModelAndView mypost(@PathVariable("id")int id,@RequestParam("text")String text,@RequestParam("data")String data,HttpServletRequest httpServletRequest,ModelAndView mv) {
+	public ModelAndView mypost(@RequestParam("text")String text,@RequestParam("data")String data,HttpServletRequest httpServletRequest,ModelAndView mv) {
 		String username=httpServletRequest.getRemoteUser();
-		 UserData userdata=repository.findById(id);
+//		 UserData userdata=repository.findById(id);
 		 Diary d=new Diary();
-		 d.setUserdata(userdata);
+//		 d.setUserdata(userdata);
 		 d.setDiary(text);
 		 d.setData(data);
-		diaryrepository.save(d);
+		diaryrepository.saveAndFlush(d);
 			
 		return new ModelAndView("redirect:/mypage");
 	}
