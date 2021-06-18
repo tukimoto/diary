@@ -20,3 +20,6 @@ form{
 input{
   width: 150px;
 }
+label{
+	margin:20px;
+}
